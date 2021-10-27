@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>FoodBuddy</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- MDB -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
+    <script type="text/javascript">
+        function accept_offer(BID,RID,UID)
+        {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, accept it!'
+                }).then((result) => {
+                    if (result.isConfirmed)
+                    {
+                        $.ajax(
+                        {
+                            type:"GET",
+                            url: "/acceptoffer",
+                            data:{
+                                 bid:BID   
+                            },
+                            success: function( data ) 
+                            {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Yaaaaaaaay',
+                                    text: 'Order Accepted :)',
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Ok'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload();
+                                    }
+                                    })
+                            }
+                         })  
+                    }
+                })
+        }
+        function reject_offer(BID)
+        {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, reject it!'
+                }).then((result) => {
+                    if (result.isConfirmed)
+                    {
+                        $.ajax(
+                        {
+                            type:"GET",
+                            url: "/rejectoffer",
+                            data:{
+                                 bid:BID   
+                            },
+                            success: function( data ) 
+                            {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Oh no',
+                                    text: 'Order Rejected :(',
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Ok'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload();
+                                    }
+                                    })
+                            }
+                        })
+                    }
+                })
+        }
+        function add_descrip(BID)
+        {
+            (async () => {
+
+                    const { value: formValues } = await Swal.fire({
+                    title: 'Add Signature Dish',
+                    html:               
+                                        '<label for="exampleInputEmail1">Signature Dish Name</label>'+
+                                        '<input type="text" id="sdname" class="swal2-input" maxlength="50" placeholder="Enter Signature Dish Name"><br><br>'+
+                                        '<label for="exampleInputEmail1">Signature Dish Description</label>'+
+                                        '<input type="text" id="sddes" class="swal2-input" maxlength="500" placeholder="Enter Signature Dish Details">',
+                    focusConfirm: false,
+                    footer: '<label for="exampleInputEmail1" style="color:red">Warning this can be added only once</label>',
+                    preConfirm: () => {
+                        return [   
+                        
+                        document.getElementById('sdname').value,
+                        document.getElementById('sddes').value,
+                        ]
+                    }
+                    })
+
+                if (formValues)
+                {
+                    $.ajax(
+                        {
+                            type:"GET",
+                            url: "/adddescrip",
+                            data:{
+                                 bid:BID,
+                                 name:formValues[0],
+                                 desc:formValues[1],  
+                            },
+                            success: function( data ) 
+                            {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Yaaaaaaaay',
+                                    text: 'Signature Dish Added :)',
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Ok'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload();
+                                    }
+                                    })
+                            }
+                         })
+                }
+
+            })()
+        }
+        function add_rating(BID)
+        {
+            (async () => {
+
+                    const { value: formValues } = await Swal.fire({
+                    title: 'Add Rating',
+                    html:  '<input type="number" id="rating" class="swal2-input"  min="1" max="5" placeholder="Enter Rating">',
+                    focusConfirm: false,
+                    footer: '<label for="exampleInputEmail1" style="color:red">Warning this can be added only once.(Rating:1-5)</label>',
+                    preConfirm: () => {
+                        return [   
+                        document.getElementById('rating').value
+                        ]
+                    }
+                    })
+
+                if (formValues && formValues[0]<6 && formValues[0]>0)
+                {
+                    $.ajax(
+                        {
+                            type:"GET",
+                            url: "/addrating",
+                            data:{
+                                 bid:BID,
+                                 rate:formValues[0],
+                            },
+                            success: function( data ) 
+                            {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Yaaaaaaaay',
+                                    text: 'Rating Done :)',
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Ok'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload();
+                                    }
+                                    })
+                            }
+                         })
+                }
+
+            })()
+        }
+    </script>
+
+</head>
+
+<body>
+
+    {% include "foodbuddy_html/homenav.html" %}
+    
+    <div class="container-fluid p-5 bg-primary text-white text-center">
+        <h1>FoodBuddy</h1>
+        <p>Welcome Buddy ! {{uname.first_name}} {{uname.last_name}}</p>
+    </div>
+    <br/>
+    
+<div class="row">
+    <div class="col-md-2">
+                <div class="p-3 text-center bg-info text-light">
+                    <h3 class="mb-3">Profile</h3>
+                </div>
+                <div class="p-3 text-center bg-light">
+                    
+                    <h6 class="mb-3">Name : {{uname.first_name}} {{uname.last_name}}</h6>
+                    <h6 class="mb-3">Email id : {{user_details.user}}</h6>
+                    <h6 class="mb-3">Contact No : {{user_details.Phone_No}}</h6>
+                    <h6 class="mb-3">Address : {{user_details.Address}}</h6>
+                </div>
+    </div>
+    <div class="col-md-10">
+        <div class="p-3 text-center bg-info text-light">
+            <h3 class="mb-3">Bookings</h3>
+        </div>
+        <div class="table-responsive">
+                        <table class="table">
+                        <thead class="thead-light">
+                            <tr class="table-dark">
+                            <th scope="col">BID</th>
+                            <th scope="col">Restaurant Name</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">Start Time</th>
+                            <th scope="col">End Date</th>
+                            <th scope="col">End Time</th>
+                            <th scope="col">Number of guests</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Necessary Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for r in book %}
+                                {% ifequal r.Status "A"%}
+                                    <tr class="table-success">
+                                {% else %}
+                                    {% ifequal r.Status "S"%}
+                                        <tr class="table-primary">
+                                    {% else %}
+                                        {% ifequal r.Status "M"%}
+                                            <tr class="table-warning">
+                                        {% else %}
+                                            <tr class="table-danger">
+                                        {% endifequal %}
+                                    {% endifequal %}
+                                {% endifequal %}
+                                <!-- A-accepted R-Rejected S-Submitted M-modified -->
+                                <td>{{r.BID}}</td>
+                                <td>{{rest|dict_key:r.RID.RID}}</td>
+                                <td>{{r.Start_Date}}</td>
+                                <td>{{r.Start_Time}}</td>
+                                <td>{{r.End_Date}}</td>
+                                <td>{{r.End_Time}}</td>
+                                <td>{{r.Party}}</td>
+                                {% ifequal r.Status "A"%}
+                                    <td>Accepted</td>
+                                {% else %}
+                                    {% ifequal r.Status "S"%}
+                                        <td>Submitted</td>
+                                    {% else %}
+                                        {% ifequal r.Status "M"%}
+                                            <td>Modified Offer</td>
+                                        {% else %}
+                                            <td>Rejected</td>
+                                        {% endifequal %}
+                                    {% endifequal %}
+                                {% endifequal %}
+                                {% ifequal r.Status "M"%}
+                                    <td>
+                                        <button type="button" style="margin-bottom: 2px;" class="btn btn-dark" onClick="accept_offer({{r.BID}})">Accept offer</button>
+                                        
+                                        <button type="button" class="btn btn-dark" onClick="reject_offer({{r.BID}})">Reject offer</button>
+                                    </td>
+                                {% else %}
+                                        {% ifequal r.Status "A"%}
+                                            {% if r.Name %}
+                                                {% if r.Rating %}
+                                                {% else %}
+                                                    <td>
+                                                        <button type="button" class="btn btn-dark" onClick="add_rating({{r.BID}})">Add Rating</button> 
+                                                    </td>
+                                                {% endif %}
+                                            {% else %}
+                                                <td>
+                                                    <button type="button"  style="margin-bottom: 2px;" class="btn btn-dark" onClick="add_descrip({{r.BID}})">Add Signature Dish</button>
+                                                    
+                                                    {% if r.Rating %}
+                                                    {% else %}
+                                                        <button type="button" class="btn btn-dark" onClick="add_rating({{r.BID}})">Add Rating</button> 
+                                                    {% endif %}
+                                                </td>
+                                            {% endif %}
+                                            
+                                        {% endifequal %}
+                                {% endifequal %}
+                                </tr>
+                            {%endfor%}
+                        </tbody>
+                        </table>
+                    </div>
+        </div>
+    </div>
+
+</div>
+</body>
+
+</html>
