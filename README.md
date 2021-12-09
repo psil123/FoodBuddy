@@ -58,9 +58,9 @@ To deploy this project run open a terminal
 Our product will be used by food enthusiasts and restaurants who are willing to rent space for food realted events and also build a good relationship with their customers.
   
 ## Team Details
-  - Pritam Sil
-  - Sai Sunil Chothave 
-  - Vishal Mishra 
+  - Pritam Sil [homepage](https://www.cse.iitb.ac.in/~pritamsil/)
+  - Sai Sunil Chothave [homepage](https://www.cse.iitb.ac.in/~saichothave/)
+  - Vishal Mishra [homepage](https://www.cse.iitb.ac.in/~vishalm/)
 
 ## Documentation
 
