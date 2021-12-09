@@ -36,9 +36,9 @@ EMAIL_USE_TLS = True
 
 EMAIL_PORT = 587
 
-EMAIL_HOST_USER = "foodbuddy404@gmail.com"
+EMAIL_HOST_USER = "Your_Business_Email"
 
-EMAIL_HOST_PASSWORD = "F00dbuddy"
+EMAIL_HOST_PASSWORD = "Your_Business_Email_Password"
 
 
 # Application definition
