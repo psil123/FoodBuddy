@@ -24,11 +24,7 @@ Our product will help your business to grow along with its patreons together as 
 - `SQLite`
 - Sweetalert2 API
 - AJAX
-- `Github`
-## List of deliverables
-- [x] Working pages
-- [x] Dynamically fetching Restaurant details from database.
-- [x] Login and sign up pages
+
 ## Hardware/Software Requirements
 
 Hardware Requirements --
@@ -42,6 +38,9 @@ Software Requirements --
 
 ## Deployment
 
+**Note :** Kindly replace 'Your_Business_Email_Passowrd' with your business email password under 'foodbuddy/foodbuddy/settings.py' and 'Your_Business_Email' with your business email under 'foodbuddy/foodbuddy/settings.py' and 'foodbuddy/foodbuddy_app/views.py'   
+   
+      
 To deploy this project run open a terminal
 
 ```bash
@@ -59,17 +58,9 @@ To deploy this project run open a terminal
 Our product will be used by food enthusiasts and restaurants who are willing to rent space for food realted events and also build a good relationship with their customers.
   
 ## Team Details
-  - Pritam Sil (21q05r001) 
-  - Sai Sunil Chothave (21q05r005)
-  - Vishal Mishra (213050066)
-
-## Contribution 
-- Pritam 
-    - Database, User and Restaurant Admin Homepages, Order management
-- Sai 
-    - Dashboard, Restaurant Homepage, Session Management
-- Vishal
-    - Dashboard, Signature Dish details in Restaurant Homepage
+  - Pritam Sil
+  - Sai Sunil Chothave 
+  - Vishal Mishra 
 
 ## Documentation
 
