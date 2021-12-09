@@ -212,7 +212,7 @@ def acceptofferR(request):
 
     'Dear '+tt.user.first_name+' '+tt.user.last_name+'\nYour Reservation Request has been ACCEPTED by the Restaurant '+rr.Name+'\nStart Date :'+str(t.Start_Date)+'\nStart Time :'+str(t.Start_Time)+'\nEnd Date: '+str(t.End_Date)+'\nEnd Time: '+str(t.End_Time)+'\n\n\nThanks and Regards,\n  FoodBuddy Team',
 
-    'foodbuddy404@gmail.com',
+    'Your_Business_Email',
 
     [tt.user.email],
 
@@ -259,7 +259,7 @@ def rejectofferR(request):
 
     'Dear '+tt.user.first_name+' '+tt.user.last_name+'\nYour Reservation Request has been REJECTED by the Restaurant '+rr.Name+'\n\n\nThanks and Regards,\n FoodBuddy Team',
 
-    'foodbuddy404@gmail.com',
+    'Your_Business_Email',
 
     [tt.user.email],
 
@@ -313,7 +313,7 @@ def modifyofferR(request):
 
     'Dear '+tt.user.first_name+' '+tt.user.last_name+',\nYour Reservation Request has been MODIFIED by the Restaurant '+rr.Name+'\nStart Date :'+str(t.Start_Date)+'\nStart Time :'+str(t.Start_Time)+'\nEnd Date: '+str(t.End_Date)+'\nEnd Time: '+str(t.End_Time)+'To Accept the Modified offer, kindly visit the FoodBuddy Portal.\n\n\nThanks and Regards,\n  FoodBuddy Team',
 
-    'foodbuddy404@gmail.com',
+    'Your_Business_Email',
 
     [tt.user.email],
 
